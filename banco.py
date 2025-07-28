@@ -439,8 +439,8 @@ class Sistema:
             return
 
         for transacao in transacoes:
-            quem_fez = transacao['Quem_Fez'] if transacao['Quem_Fez'] else "Desconhecido"
-            quem_recebeu = transacao['Quem_Recebeu'] if transacao['Quem_Recebeu'] else "Desconhecido"
+            quem_fez = transacao["Quem_Fez"] if transacao["Quem_Fez"] else "Desconhecido"
+            quem_recebeu = transacao["Quem_Recebeu"] if transacao["Quem_Recebeu"] else "Desconhecido"
 
 
             print("\n========-----\n")
