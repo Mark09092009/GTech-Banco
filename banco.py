@@ -233,7 +233,7 @@ class Sistema:
     
     def Mostrar_Saldo(self):
         self.conexao.Executar("SELECT Saldo FROM Conta WHERE ID = %s", (self.id_Conta_Login,))
-        print(f"|- Saldo: R$ {self.conexao.cursor.fetchone()["Saldo"]}")
+        print(f"|- Saldo: R$ {self.conexao.cursor.fetchone()['Saldo']}")
 
         
     def Extrato_Bancario(self):
@@ -258,12 +258,12 @@ class Sistema:
                                             FROM Pessoa AS p
                                             INNER JOIN Conta AS c ON c.Pessoa_ID = p.ID
                                             WHERE c.ID = %s
-                                            """,(transacao["Conta_Destino"],))
-                        destinatario = self.conexao.cursor.fetchone()["Nome"]
+                                            """,(transacao['Conta_Destino'],))
+                        destinatario = self.conexao.cursor.fetchone()['Nome']
                         print(f"|- Feito para: {destinatario}")
-                print(f"|- Data: {transacao["Data"]}")
-                print(f"|- Tipo: {transacao["Tipo"]}")
-                print(f"|- Valor: R$ {transacao["Valor"]}")
+                print(f"|- Data: {transacao['Data']}")
+                print(f"|- Tipo: {transacao['Tipo']}")
+                print(f"|- Valor: R$ {transacao['Valor']}")
                 print("")
             print("========-----\n")
 
@@ -275,7 +275,7 @@ class Sistema:
             except ValueError:
                 print("|- Senha invalida!")
             for conta in contas:
-                if conta["ID"] == self.id_Conta_Login and conta["Senha"] == senha_Atual:
+                if conta['ID'] == self.id_Conta_Login and conta['Senha'] == senha_Atual:
                     while True:
                         while True:
                             try:
@@ -312,11 +312,6 @@ class Sistema:
                             print("|- Senha alterada com sucesso!")
                             return
                         
-    """
-    - Número de transferências realizadas por cliente - contagem (COUNT) agrupada por cliente.
-    - Clientes que nunca realizaram transações (clientes inativos) - INNER JOIN entre cliente e transações, onde o campo de transação para o cliente seja NULL.
-    """
-                        
     def Mostrar_Todas_Transacoes(self):
         transacoes = self.conexao.Return_Todas_Transacoes()
 
@@ -330,9 +325,9 @@ class Sistema:
 
 
             print("\n========-----\n")
-            print(f"|- Data: {transacao["Data"]}")
-            print(f"|- Tipo: {transacao["Tipo"]}")
-            print(f"|- Valor: R$ {transacao["Valor"]}")
+            print(f"|- Data: {transacao['Data']}")
+            print(f"|- Tipo: {transacao['Tipo']}")
+            print(f"|- Valor: R$ {transacao['Valor']}")
             print(f"|- Quem fez: {quem_fez}")
             print(f"|- Quem recebeu: {quem_recebeu}")
         print("\n========-----\n")
@@ -370,8 +365,8 @@ class Sistema:
 
         for transacao in transacoes:
             print("\n========-----\n")
-            print(f"|- Cliente: {transacao["Nome"]}")
-            print(f"|- Total movimentado: R$ {transacao["Total_Movimentado"]:.2f}")
+            print(f"|- Cliente: {transacao['Nome']}")
+            print(f"|- Total movimentado: R$ {transacao['Total_Movimentado']:.2f}")
         print("\n========-----\n")
 
     def Return_Saldo_Todas_Contas(self):
@@ -383,10 +378,10 @@ class Sistema:
         else:
             for conta in contas:
                 print("\n========-----\n")
-                print(f"|- ID Conta: {conta["ID"]}")
-                print(f"|- Saldo: R$ {float(conta["Saldo"])}")
-                print(f"|- Nome Titular: {conta["Nome_Titular"]}")
-                print(f"|- CPF Titular: {conta["CPF_Titular"]}")
+                print(f"|- ID Conta: {conta['ID']}")
+                print(f"|- Saldo: R$ {float(conta['Saldo'])}")
+                print(f"|- Nome Titular: {conta['Nome_Titular']}")
+                print(f"|- CPF Titular: {conta['CPF_Titular']}")
             print("\n========-----\n")
 
     def Top_Cinco(self):
@@ -395,16 +390,16 @@ class Sistema:
             print("|- Nenhuma conta cadastrada!")
             return
 
-        contas_ordenadas = sorted(contas, key=lambda x: float(x["Saldo"]), reverse=True)[:5]
+        contas_ordenadas = sorted(contas, key=lambda x: float(x['Saldo']), reverse=True)[:5]
         top = 0
         for conta in contas_ordenadas:
             top += 1
             print("\n========-----\n")
             print(f"|- {top}º ->")
-            print(f"|- ID Conta: {conta["ID"]}")
-            print(f"|- Saldo: R$ {float(conta["Saldo"])}")
-            print(f"|- Nome Titular: {conta["Nome_Titular"]}")
-            print(f"|- CPF Titular: {conta["CPF_Titular"]}")
+            print(f"|- ID Conta: {conta['ID']}")
+            print(f"|- Saldo: R$ {float(conta['Saldo'])}")
+            print(f"|- Nome Titular: {conta['Nome_Titular']}")
+            print(f"|- CPF Titular: {conta['CPF_Titular']}")
         print("\n========-----\n")
 
     def Menor_100(self):
@@ -419,10 +414,10 @@ class Sistema:
         else:
             for conta in contas:
                 print("\n========-----\n")
-                print(f"|- ID Conta: {conta["ID"]}")
-                print(f"|- Saldo: R$ {float(conta["Saldo"])}")
-                print(f"|- Nome Titular: {conta["Nome_Titular"]}")
-                print(f"|- CPF Titular: {conta["CPF_Titular"]}")
+                print(f"|- ID Conta: {conta['ID']}")
+                print(f"|- Saldo: R$ {float(conta['Saldo'])}")
+                print(f"|- Nome Titular: {conta['Nome_Titular']}")
+                print(f"|- CPF Titular: {conta['CPF_Titular']}")
             print("\n========-----\n")
 
     def Valor_Em_Circulação(self):
@@ -439,14 +434,14 @@ class Sistema:
             return
 
         for transacao in transacoes:
-            quem_fez = transacao["Quem_Fez"] if transacao["Quem_Fez"] else "Desconhecido"
-            quem_recebeu = transacao["Quem_Recebeu"] if transacao["Quem_Recebeu"] else "Desconhecido"
+            quem_fez = transacao['Quem_Fez'] if transacao['Quem_Fez'] else "Desconhecido"
+            quem_recebeu = transacao['Quem_Recebeu'] if transacao['Quem_Recebeu'] else "Desconhecido"
 
 
             print("\n========-----\n")
-            print(f"|- Data: {transacao["Data"]}")
-            print(f"|- Tipo: {transacao["Tipo"]}")
-            print(f"|- Valor: R$ {transacao["Valor"]}")
+            print(f"|- Data: {transacao['Data']}")
+            print(f"|- Tipo: {transacao['Tipo']}")
+            print(f"|- Valor: R$ {transacao['Valor']}")
             print(f"|- Quem fez: {quem_fez}")
             print(f"|- Quem recebeu: {quem_recebeu}")
         print("\n========-----\n")
@@ -459,8 +454,8 @@ class Sistema:
         else:
             for cliente in clientes:
                 print("\n========-----\n")
-                print(f"|- Cliente: {cliente["Cliente"]}")
-                print(f"|- Quantidade de transferencias feitas: {cliente["Quantidade_Transferencias"]}")
+                print(f"|- Cliente: {cliente['Cliente']}")
+                print(f"|- Quantidade de transferencias feitas: {cliente['Quantidade_Transferencias']}")
             print("\n========-----\n")
 
     def Cliente_Not_Transacao(self):
@@ -474,8 +469,8 @@ class Sistema:
         else:
             for cliente in clientes:
                 print("\n========-----\n")
-                print(f"|- ID Conta: {cliente["ID"]}")
-                print(f"|- Saldo: R$ {float(cliente["Saldo"])}")
-                print(f"|- Nome Titular: {cliente["Nome_Titular"]}")
-                print(f"|- CPF Titular: {cliente["CPF_Titular"]}")
+                print(f"|- ID Conta: {cliente['ID']}")
+                print(f"|- Saldo: R$ {float(cliente['Saldo'])}")
+                print(f"|- Nome Titular: {cliente['Nome_Titular']}")
+                print(f"|- CPF Titular: {cliente['CPF_Titular']}")
             print("\n========-----\n")
